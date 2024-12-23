@@ -20,3 +20,8 @@ class Charge:
         return self.q
     def get_radius(self): 
         return self.radius
+    def get_screen_pos(self): 
+        return (self.x, self.y)
+    def set_position(self, pos): 
+        self.x = pos[0]
+        self.y = pos[1]

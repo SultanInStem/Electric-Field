@@ -25,7 +25,7 @@ class Vector:
                 dir_v = (math_start_pos[0] - q_math_pos[0], math_start_pos[1] - q_math_pos[1])
                 angle = abs(math.atan2(dir_v[1], dir_v[0]))    
                 end_x += e_field * math.cos(angle)
-                if dir_v[1] > 0: 
+                if dir_v[1] >= 0: 
                     end_y -= e_field * math.sin(angle)
                 else: 
                     end_y += e_field * math.sin(angle)
@@ -37,7 +37,7 @@ class Vector:
         gray_value = int(255 * (normalized_mag)) 
         self.color = (gray_value, gray_value, gray_value)
         self.normalize()
-        self.scale(30)
+        self.scale(25)
     def get_dx(self): 
         return (self.end_x - self.start_x)
     def get_dy(self): 

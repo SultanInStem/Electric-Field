@@ -1,6 +1,8 @@
 import pygame 
+import sys
 from vector import Vector
 import globals
+from globals import distance
 from charge import Charge
 class Canvas: 
     def __init__(self): 
@@ -11,19 +13,30 @@ class Canvas:
         self.running = True
         self.charges = [Charge(0,-200,1), Charge(0,200,-1)]
         self.vectors = []
+        self.dragging = False
 
 
-        for i in range(-20, 20): 
-            for j in range(-20, 20): 
-                v = Vector(i*50,j*50, 0,0)
+        for i in range(-30, 30): 
+            for j in range(-30, 30): 
+                v = Vector(i*40,j*40, 0,0)
                 v.normalize()
-                v.scale(30)
+                v.scale(25)
                 self.vectors.append(v)
     
     def handle_events(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 self.running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN: 
+                for i in range(0, len(self.charges)): 
+                    dist = distance(event.pos, self.charges[i].get_screen_pos())
+                    if dist <=  self.charges[i].get_radius(): 
+                        self.dragging = True
+            elif event.type == pygame.MOUSEBUTTONUP: 
+                self.dragging = False 
+            elif event.type == pygame.MOUSEMOTION and self.dragging:
+                self.charges[0].set_position(event.pos)
+
     def render(self): 
         self.screen.fill((0,0,0))
 
@@ -45,3 +58,4 @@ class Canvas:
             self.update()
             self.render()
         pygame.quit() 
+        sys.exit()
