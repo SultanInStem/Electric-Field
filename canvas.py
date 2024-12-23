@@ -14,6 +14,7 @@ class Canvas:
         self.charges = [Charge(0,-200,1), Charge(0,200,-1)]
         self.vectors = []
         self.dragging = False
+        self.dragging_index = 0 
 
 
         for i in range(-30, 30): 
@@ -32,10 +33,11 @@ class Canvas:
                     dist = distance(event.pos, self.charges[i].get_screen_pos())
                     if dist <=  self.charges[i].get_radius(): 
                         self.dragging = True
+                        self.dragging_index = i
             elif event.type == pygame.MOUSEBUTTONUP: 
                 self.dragging = False 
             elif event.type == pygame.MOUSEMOTION and self.dragging:
-                self.charges[0].set_position(event.pos)
+                self.charges[self.dragging_index].set_position(event.pos)
 
     def render(self): 
         self.screen.fill((0,0,0))
