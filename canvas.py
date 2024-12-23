@@ -2,7 +2,7 @@ import pygame
 import sys
 from vector import Vector
 import globals
-from globals import distance
+from globals import distance, Q
 from charge import Charge
 class Canvas: 
     def __init__(self): 

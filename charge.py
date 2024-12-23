@@ -7,7 +7,7 @@ class Charge:
         self.x = to_screen_coords(x,y)[0] 
         self.y = to_screen_coords(x,y)[1] 
         self.q = q 
-        self.radius = abs(15*q)
+        self.radius = 15 + abs(q)
         if q < 0: 
             self.color = BLUE_COLOR
         else: 
