@@ -4,14 +4,18 @@ import globals
 class Canvas: 
     def __init__(self): 
         pygame.init()
-        self.vector = Vector(0,0,100,100)
-        self.vector.normalize()
-        self.vector.scale(50)
         self.screen = pygame.display.set_mode((globals.SCREEN_WIDTH, globals.SCREEN_HEIGHT))
         pygame.display.set_caption("Vector Field Simulation")
         self.clock = pygame.time.Clock()
         self.running = True
         self.charges = []
+        self.vectors = []
+        for i in range(-20, 20): 
+            for j in range(-20, 20): 
+                v = Vector(i*50,j*50, 0,0)
+                v.normalize()
+                v.scale(30)
+                self.vectors.append(v)
     
     def handle_events(self): 
         for event in pygame.event.get():
@@ -20,8 +24,8 @@ class Canvas:
     def render(self): 
         self.screen.fill((0,0,0))
 
-        self.vector.draw(self.screen, (255,255,255))
-
+        for v in self.vectors: 
+            v.draw(self.screen, (255,255,255))
 
         pygame.display.flip()
         self.clock.tick(60)

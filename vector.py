@@ -1,12 +1,12 @@
 import math 
 import pygame 
-
+from globals import to_math_coords, to_screen_coords
 class Vector: 
     def __init__(self, start_x, start_y, end_x, end_y):
-        self.start_x = start_x 
-        self.start_y = start_y 
-        self.end_x = end_x 
-        self.end_y = end_y 
+        self.start_x = to_screen_coords(start_x, start_y)[0]
+        self.start_y = to_screen_coords(start_x, start_y)[1]
+        self.end_x = to_screen_coords(end_x, end_y)[0] 
+        self.end_y = to_screen_coords(end_x, end_y)[1]
 
     def get_mag(self): 
         return math.sqrt((self.end_x - self.start_x)**2 + (self.end_y - self.start_y)**2)
@@ -24,7 +24,8 @@ class Vector:
         self.end_x = end_x 
         self.end_y = end_y
         return Vector(self.start_x, self.start_y, end_x, end_y)
-    def draw(self, screen, color, width=2, arrow_size = 10): 
+    def draw(self, screen, color, width=4, arrow_size = 10): 
+
         pygame.draw.line(screen, color, (self.start_x, self.start_y), (self.end_x, self.end_y))
         dir_angle = math.atan2(self.get_dy(), self.get_dx()) 
         arrow_angle = math.pi / 6 
