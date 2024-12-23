@@ -1,6 +1,6 @@
 import math 
 import pygame 
-from globals import to_math_coords, to_screen_coords, K
+from globals import to_math_coords, to_screen_coords, K, distance
 class Vector: 
     def __init__(self, start_x, start_y, end_x, end_y):
         self.start_x = to_screen_coords(start_x, start_y)[0]
@@ -33,7 +33,8 @@ class Vector:
 
         self.end_x = to_screen_coords(end_x, end_y)[0]
         self.end_y = to_screen_coords(end_x, end_y)[1]
-        # self.color = (self.get_mag() % 255,self.get_mag() % 255, self.get_mag() % 255)
+        if math_start_pos == (50,50): 
+            print(self.get_mag())
         self.normalize()
         self.scale(30)
     def get_dx(self): 

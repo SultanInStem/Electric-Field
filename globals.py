@@ -1,3 +1,4 @@
+import math
 SCREEN_WIDTH = 1200 
 SCREEN_HEIGHT = 800 
 
@@ -17,5 +18,6 @@ def to_math_coords(screen_x, screen_y):
     math_x = screen_x - CENTER_X 
     math_y = screen_y - CENTER_Y
     return (math_x, math_y)
-
+def distance(a,b):
+    return math.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
 
