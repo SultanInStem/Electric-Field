@@ -21,6 +21,8 @@ class Vector:
             return Vector(self.start_x, self.start_y, self.end_x, self.end_y)
         end_x = (self.get_dx() / mag) + self.start_x
         end_y = (self.get_dy() / mag) + self.start_y
+        self.end_x = end_x 
+        self.end_y = end_y
         return Vector(self.start_x, self.start_y, end_x, end_y)
     def draw(self, screen, color, width=2): 
         pygame.draw.line(screen, color, (self.start_x, self.start_y), (self.end_x, self.end_y))
@@ -29,4 +31,6 @@ class Vector:
         scaled_dy = self.get_dy() * factor 
         end_x = self.start_x + scaled_dx 
         end_y = self.start_y + scaled_dy 
+        self.end_x = end_x 
+        self.end_y = end_y
         return Vector(self.start_x, self.start_y, end_x, end_y) 
