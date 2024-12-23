@@ -1,6 +1,7 @@
 import pygame 
 from vector import Vector
 import globals
+from charge import Charge
 class Canvas: 
     def __init__(self): 
         pygame.init()
@@ -10,6 +11,9 @@ class Canvas:
         self.running = True
         self.charges = []
         self.vectors = []
+        self.charge = Charge(0,0,-1)
+
+
         for i in range(-20, 20): 
             for j in range(-20, 20): 
                 v = Vector(i*50,j*50, 0,0)
@@ -26,7 +30,7 @@ class Canvas:
 
         for v in self.vectors: 
             v.draw(self.screen, (255,255,255))
-
+        self.charge.draw(self.screen)
         pygame.display.flip()
         self.clock.tick(60)
     def update(self): 
