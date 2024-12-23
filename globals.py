@@ -4,6 +4,10 @@ SCREEN_HEIGHT = 800
 CENTER_X = SCREEN_WIDTH // 2 
 CENTER_Y = SCREEN_HEIGHT // 2 
 BG_COLOR = (0,0,0)
+RED_COLOR = (205,28,24)
+BLUE_COLOR = (0,0,139)
+
+K = 1
 
 def to_screen_coords(math_x, math_y): 
     screen_x = CENTER_X + math_x 

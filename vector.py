@@ -1,6 +1,6 @@
 import math 
 import pygame 
-from globals import to_math_coords, to_screen_coords
+from globals import to_math_coords, to_screen_coords, K
 class Vector: 
     def __init__(self, start_x, start_y, end_x, end_y):
         self.start_x = to_screen_coords(start_x, start_y)[0]
@@ -10,7 +10,27 @@ class Vector:
 
     def get_mag(self): 
         return math.sqrt((self.end_x - self.start_x)**2 + (self.end_y - self.start_y)**2)
-    
+    def calculate_direction_from_charges(self, charges):
+        print("HELLO")
+        point = to_math_coords(self.start_x, self.start_y)
+        x_component = 0 
+        y_component = 0
+        for q in charges: 
+            q_pos = q.get_math_pos()
+            r = math.sqrt((q_pos[0] - point[0])**2 + (q_pos[1] - point[1])**2)
+            if r != 0: 
+                e_field = K * q.get_charge() / (r**2)
+                angle = math.atan2(point[1] - q_pos[1], point[0] - q_pos[0])
+                if q.get_charge() > 0: 
+                    x_component -= e_field * math.cos(angle)
+                    y_component -= e_field * math.sin(angle)
+                else: 
+                    x_component += e_field * math.cos(angle)
+                    y_component += e_field * math.sin(angle)
+        self.end_x = to_screen_coords(x_component,y_component)[0]
+        self.end_y = to_screen_coords(x_component, y_component)[1]
+        self.normalize()
+        self.scale(30)
     def get_dx(self): 
         return (self.end_x - self.start_x)
     def get_dy(self): 
@@ -23,7 +43,6 @@ class Vector:
         end_y = (self.get_dy() / mag) + self.start_y
         self.end_x = end_x 
         self.end_y = end_y
-        return Vector(self.start_x, self.start_y, end_x, end_y)
     def draw(self, screen, color, width=4, arrow_size = 10): 
 
         pygame.draw.line(screen, color, (self.start_x, self.start_y), (self.end_x, self.end_y))
@@ -44,4 +63,3 @@ class Vector:
         end_y = self.start_y + scaled_dy 
         self.end_x = end_x 
         self.end_y = end_y
-        return Vector(self.start_x, self.start_y, end_x, end_y) 

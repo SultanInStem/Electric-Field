@@ -9,9 +9,8 @@ class Canvas:
         pygame.display.set_caption("Vector Field Simulation")
         self.clock = pygame.time.Clock()
         self.running = True
-        self.charges = []
+        self.charges = [Charge(0,0,1)]
         self.vectors = []
-        self.charge = Charge(0,0,-1)
 
 
         for i in range(-20, 20): 
@@ -30,11 +29,15 @@ class Canvas:
 
         for v in self.vectors: 
             v.draw(self.screen, (255,255,255))
-        self.charge.draw(self.screen)
+
+        for q in self.charges: 
+            q.draw(self.screen)
+
         pygame.display.flip()
         self.clock.tick(60)
     def update(self): 
-        pass
+        for i in range(0, len(self.vectors)): 
+            self.vectors[i].calculate_direction_from_charges(self.charges)
 
     def run(self): 
         while self.running: 
