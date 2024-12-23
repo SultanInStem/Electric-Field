@@ -9,4 +9,5 @@ class Sensor:
         self.color = YELLOW_COLOR
     def draw(self, screen): 
         pygame.draw.circle(screen)
-    
+    def move(self): 
+        pass
