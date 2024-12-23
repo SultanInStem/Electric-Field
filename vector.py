@@ -11,7 +11,29 @@ class Vector:
     def get_mag(self): 
         return math.sqrt((self.end_x - self.start_x)**2 + (self.end_y - self.start_y)**2)
     def calculate_direction_from_charges(self, charges): 
-        pass
+        math_end_pos = to_math_coords(self.end_x, self.end_y)
+        math_start_pos = to_math_coords(self.start_x, self.start_y)
+        end_x = 0 
+        end_y = 0 
+        for charge in charges: 
+            q_math_pos = charge.get_math_pos()
+            q = charge.get_charge()
+            r_squared = (math_start_pos[0] - q_math_pos[0])**2 + (math_start_pos[1] - q_math_pos[1])**2
+            if r_squared != 0: 
+                e_field = (K * q) / r_squared
+                dir_v = (math_start_pos[0] - q_math_pos[0], math_start_pos[1] - q_math_pos[1])
+                angle = abs(math.atan2(dir_v[1], dir_v[0]))    
+                end_x += e_field * math.cos(angle)
+                if dir_v[1] > 0: 
+                    end_y -= e_field * math.sin(angle)
+                else: 
+                    end_y += e_field * math.sin(angle)
+
+
+        self.end_x = to_screen_coords(end_x, end_y)[0]
+        self.end_y = to_screen_coords(end_x, end_y)[1]
+        self.normalize()
+        self.scale(30)
     def get_dx(self): 
         return (self.end_x - self.start_x)
     def get_dy(self): 
