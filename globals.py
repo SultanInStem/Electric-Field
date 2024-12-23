@@ -7,6 +7,7 @@ CENTER_Y = SCREEN_HEIGHT // 2
 BG_COLOR = (0,0,0)
 RED_COLOR = (205,28,24)
 BLUE_COLOR = (0,0,139)
+YELLOW_COLOR = (253, 218, 13)
 K = (1200**3) * 8.99 * (10**9)
 Q = 1.6 * 10**(-9)
 

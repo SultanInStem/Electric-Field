@@ -2,7 +2,7 @@ import pygame
 import sys
 from vector import Vector
 import globals
-from globals import distance, Q
+from globals import distance, Q, to_math_coords, to_screen_coords
 from charge import Charge
 class Canvas: 
     def __init__(self): 
@@ -12,6 +12,7 @@ class Canvas:
         self.clock = pygame.time.Clock()
         self.running = True
         self.charges = [Charge(0,-200,Q), Charge(0,200,-Q)]
+        self.sensors = []
         self.vectors = []
         self.dragging = False
         self.dragging_index = 0 
@@ -38,7 +39,11 @@ class Canvas:
                 self.dragging = False 
             elif event.type == pygame.MOUSEMOTION and self.dragging:
                 self.charges[self.dragging_index].set_position(event.pos)
-
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE: 
+                    x,y = to_math_coords(pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1])
+                
+                    self.sensors.append(Charge(x, -y, -1))
     def render(self): 
         self.screen.fill((0,0,0))
 
@@ -47,6 +52,8 @@ class Canvas:
 
         for q in self.charges: 
             q.draw(self.screen)
+        for t in self.sensors: 
+            t.draw(self.screen)
 
         pygame.display.flip()
         self.clock.tick(60)
