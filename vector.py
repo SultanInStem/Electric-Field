@@ -24,8 +24,18 @@ class Vector:
         self.end_x = end_x 
         self.end_y = end_y
         return Vector(self.start_x, self.start_y, end_x, end_y)
-    def draw(self, screen, color, width=2): 
+    def draw(self, screen, color, width=2, arrow_size = 10): 
         pygame.draw.line(screen, color, (self.start_x, self.start_y), (self.end_x, self.end_y))
+        dir_angle = math.atan2(self.get_dy(), self.get_dx()) 
+        arrow_angle = math.pi / 6 
+        left_x = self.end_x - arrow_size * math.cos(dir_angle - arrow_angle)
+        left_y = self.end_y - arrow_size * math.sin(dir_angle - arrow_angle)
+
+        right_x = self.end_x - arrow_size * math.cos(dir_angle + arrow_angle)
+        right_y = self.end_y - arrow_size * math.sin(dir_angle + arrow_angle) 
+
+
+        pygame.draw.polygon(screen,color,[(self.end_x, self.end_y), (left_x, left_y), (right_x, right_y)])
     def scale(self, factor): 
         scaled_dx = self.get_dx() * factor 
         scaled_dy = self.get_dy() * factor 
