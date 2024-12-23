@@ -33,8 +33,9 @@ class Vector:
 
         self.end_x = to_screen_coords(end_x, end_y)[0]
         self.end_y = to_screen_coords(end_x, end_y)[1]
-        if math_start_pos == (50,50): 
-            print(self.get_mag())
+        normalized_mag = min(1, self.get_mag() / 150000)
+        gray_value = int(255 * (normalized_mag)) 
+        self.color = (gray_value, gray_value, gray_value)
         self.normalize()
         self.scale(30)
     def get_dx(self): 
