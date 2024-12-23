@@ -7,6 +7,7 @@ class Vector:
         self.start_y = to_screen_coords(start_x, start_y)[1]
         self.end_x = to_screen_coords(end_x, end_y)[0] 
         self.end_y = to_screen_coords(end_x, end_y)[1]
+        self.color = (255,255,255)
 
     def get_mag(self): 
         return math.sqrt((self.end_x - self.start_x)**2 + (self.end_y - self.start_y)**2)
@@ -32,6 +33,7 @@ class Vector:
 
         self.end_x = to_screen_coords(end_x, end_y)[0]
         self.end_y = to_screen_coords(end_x, end_y)[1]
+        # self.color = (self.get_mag() % 255,self.get_mag() % 255, self.get_mag() % 255)
         self.normalize()
         self.scale(30)
     def get_dx(self): 
@@ -46,8 +48,8 @@ class Vector:
         end_y = (self.get_dy() / mag) + self.start_y
         self.end_x = end_x 
         self.end_y = end_y
-    def draw(self, screen, color, width=4, arrow_size = 10): 
-
+    def draw(self, screen, width=4, arrow_size = 10): 
+        color = self.color
         pygame.draw.line(screen, color, (self.start_x, self.start_y), (self.end_x, self.end_y))
         dir_angle = math.atan2(self.get_dy(), self.get_dx()) 
         arrow_angle = math.pi / 6 
