@@ -11,7 +11,7 @@ class Canvas:
         pygame.display.set_caption("Vector Field Simulation")
         self.clock = pygame.time.Clock()
         self.running = True
-        self.charges = [Charge(0,-200,1), Charge(0,200,-1)]
+        self.charges = [Charge(0,-200,Q), Charge(0,200,-Q)]
         self.vectors = []
         self.dragging = False
         self.dragging_index = 0 
