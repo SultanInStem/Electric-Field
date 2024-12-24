@@ -58,7 +58,9 @@ class Canvas:
         self.clock.tick(60)
     def update(self): 
         for i in range(0, len(self.vectors)): 
-            self.vectors[i].calculate_direction_from_charges(self.charges)
+            self.vectors[i].calculate_direction_from_charges(self.charges) 
+        for i in range(0, len(self.sensors)): 
+            self.sensors[i].move()
 
     def run(self): 
         while self.running: 

@@ -11,5 +11,4 @@ class Sensor:
     def draw(self, screen): 
         pygame.draw.circle(screen,self.color,(self.x,self.y),10,0)
     def move(self): 
-
         pass
