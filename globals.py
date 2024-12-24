@@ -23,3 +23,8 @@ def to_math_coords(screen_x, screen_y):
 def distance(a,b):
     return math.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
 
+
+def calculate_efield(point, charges):
+    
+    pass 
+

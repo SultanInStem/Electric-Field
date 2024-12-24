@@ -1,5 +1,5 @@
 import pygame
-from globals import to_screen_coords, Q, YELLOW_COLOR
+from globals import to_screen_coords, Q, YELLOW_COLOR, to_math_coords
 
 class Sensor: 
     def __init__(self,x,y):
@@ -10,5 +10,6 @@ class Sensor:
         self.mass = 9.1 * (10**(-31))
     def draw(self, screen): 
         pygame.draw.circle(screen,self.color,(self.x,self.y),10,0)
-    def move(self): 
+    def move(self, charges):
+        
         pass
