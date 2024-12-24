@@ -4,6 +4,7 @@ from vector import Vector
 import globals
 from globals import distance, Q, to_math_coords, to_screen_coords
 from charge import Charge
+from sensor import Sensor
 class Canvas: 
     def __init__(self): 
         pygame.init()
@@ -42,14 +43,12 @@ class Canvas:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE: 
                     x,y = to_math_coords(pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1])
-                
-                    self.sensors.append(Charge(x, -y, -1))
+                    self.sensors.append(Sensor(x, -y))
     def render(self): 
         self.screen.fill((0,0,0))
 
         for v in self.vectors: 
             v.draw(self.screen)
-
         for q in self.charges: 
             q.draw(self.screen)
         for t in self.sensors: 
