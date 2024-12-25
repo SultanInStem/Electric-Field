@@ -25,6 +25,20 @@ def distance(a,b):
 
 
 def calculate_efield(point, charges):
-    
-    pass 
+    end_x = 0
+    end_y = 0 
+    for charge in charges: 
+        charge_math_pos = charge.get_math_pos()
+        q = charge.get_charge()
+        r_squared = (point[0] - charge_math_pos[0])**2 + (point[1] - charge_math_pos[1])**2
+        if r_squared != 0: 
+            e_field = (K * q) / r_squared
+            direction = (point[0] - charge_math_pos[0], point[1] - charge_math_pos[1])
+            angle = abs(math.atan2(direction[1], direction[0]))
+            end_x += e_field * math.cos(angle)
+            if direction[1] >= 0: 
+                end_y -= e_field * math.sin(angle)
+            else: 
+                end_y += e_field * math.sin(angle)
+    return to_screen_coords(end_x, end_y)
 
