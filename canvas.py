@@ -2,9 +2,10 @@ import pygame
 import sys
 from vector import Vector
 import globals
-from globals import distance, Q, to_math_coords, to_screen_coords
+from globals import distance, Q, to_math_coords, to_screen_coords, SCREEN_WIDTH, SCREEN_HEIGHT
 from charge import Charge
 from sensor import Sensor
+import pygame.gfxdraw
 class Canvas: 
     def __init__(self): 
         pygame.init()
@@ -51,8 +52,14 @@ class Canvas:
             v.draw(self.screen)
         for q in self.charges: 
             q.draw(self.screen)
-        for t in self.sensors: 
-            t.draw(self.screen)
+
+        for i in range(0, len(self.sensors)): 
+            pos = self.sensors[i].get_math_pos()
+            if abs(pos[0]) > (SCREEN_WIDTH / 2) + 10 or abs(pos[1]) > (SCREEN_HEIGHT / 2) + 10: 
+                del self.sensors[i]
+            else: 
+                self.sensors[i].draw(self.screen)
+
 
         pygame.display.flip()
         self.clock.tick(60)
