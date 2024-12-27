@@ -54,11 +54,7 @@ class Canvas:
             q.draw(self.screen)
 
         for i in range(0, len(self.sensors)): 
-            pos = self.sensors[i].get_math_pos()
-            if abs(pos[0]) > (SCREEN_WIDTH / 2) + 10 or abs(pos[1]) > (SCREEN_HEIGHT / 2) + 10: 
-                del self.sensors[i]
-            else: 
-                self.sensors[i].draw(self.screen)
+            self.sensors[i].draw(self.screen)
 
 
         pygame.display.flip()
